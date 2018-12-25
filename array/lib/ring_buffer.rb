@@ -25,6 +25,7 @@ class RingBuffer
 
   # O(1)
   def pop
+    raise "index out of bounds" if self.length == 0
     popped_el = self[self.length - 1]
     self[self.length - 1] = nil
     self.length -= 1
