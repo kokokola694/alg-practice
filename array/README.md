@@ -1,4 +1,4 @@
-# Practice with Static and Dynamic Arrays
+# Static and Dynamic Arrays
 
 Arrays in C are fixed in size (static) and thus a specific amount of memory is allocated for them. Arrays in Ruby can be modified in size (dynamic) by reallocating memory when the array's capacity is filled.
 
