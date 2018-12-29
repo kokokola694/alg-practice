@@ -13,7 +13,7 @@ class BinaryMinHeap
   def extract
     self.store[0], self.store[-1] = self.store[-1], self.store[0]
     extracted = self.store.pop
-    BinaryMinHeap.heapify_down(self.store, 0)
+    BinaryMinHeap.heapify_down(self.store, 0, self.store.length, &prc)
     extracted
   end
 
@@ -23,7 +23,7 @@ class BinaryMinHeap
 
   def push(val)
     self.store.push(val)
-    BinaryMinHeap.heapify_up(self.store, self.count - 1)
+    BinaryMinHeap.heapify_up(self.store, self.count - 1, self.store.length, &prc)
   end
 
   public
