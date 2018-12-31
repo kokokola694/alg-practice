@@ -3,7 +3,7 @@ class BinaryMinHeap
 
   def initialize(&prc)
     @store = []
-    @prc ||= Proc.new { |el1, el2| el1 <=> el2 }
+    @prc = prc
   end
 
   def count
@@ -13,17 +13,17 @@ class BinaryMinHeap
   def extract
     self.store[0], self.store[-1] = self.store[-1], self.store[0]
     extracted = self.store.pop
-    BinaryMinHeap.heapify_down(self.store, 0, self.store.length, &prc)
+    BinaryMinHeap.heapify_down(self.store, 0, count, &prc)
     extracted
   end
 
   def peek
-    self.store[0]
+    self.store.first
   end
 
   def push(val)
     self.store.push(val)
-    BinaryMinHeap.heapify_up(self.store, self.count - 1, self.store.length, &prc)
+    BinaryMinHeap.heapify_up(self.store, self.count - 1, count, &prc)
   end
 
   public
@@ -43,7 +43,7 @@ class BinaryMinHeap
     children = child_indices(len, parent_idx)
 
     return array if children.all? do |child_i|
-      prc.call(array[parent_idx, array[child_i]]) < 1
+      prc.call(array[parent_idx], array[child_i]) < 1
     end
 
     if children.length == 1
